@@ -37,4 +37,5 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := $(apache-commons-math_src_files)
 LOCAL_JAVACFLAGS := -encoding UTF-8
 LOCAL_SDK_VERSION := current
+LOCAL_JAVA_LANGUAGE_VERSION := 1.7
 include $(BUILD_HOST_JAVA_LIBRARY)
