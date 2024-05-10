@@ -50,12 +50,15 @@ license {
     ],
 }
 
+// NOTE: New users of this library should prefer the 
+// commons-math3 library over the commons-math library.
+
 java_library {
     name: "apache-commons-math",
     host_supported: true,
     java_version: "1.7",
 
-    srcs: ["src/main/java/**/*.java"],
+    srcs: ["src/main/java/org/apache/commons/math/**/*.java"],
     sdk_version: "current",
     errorprone: {
         javacflags: [
@@ -64,6 +67,28 @@ java_library {
             "-Xep:BoxedPrimitiveEquality:OFF",
         ],
     },
+}
+
+java_library {
+    name: "apache-commons-math3",
+    host_supported: true,
+    java_version: "1.7",
+    srcs: ["src/main/java/org/apache/commons/math3/**/*.java"],
+    sdk_version: "current",
+    errorprone: {
+        javacflags: [
+            "-Xep:MissingOverride:OFF",
+            "-Xep:IdentityBinaryExpression:OFF",
+            "-Xep:BoxedPrimitiveEquality:OFF",
+        ],
+    },
+    target: {
+        android: {
+            // Exclude the geometry module from Android variant due to missing dependency
+            // on java.awt.geom.AffineTransform.
+            exclude_srcs: ["src/main/java/org/apache/commons/math3/geometry/**/*.java"]
+        }
+    }
 }
 
 java_library_host {
